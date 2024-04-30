@@ -4,7 +4,6 @@ from typing import Optional, Callable, NewType
 from collections.abc import MutableSequence
 
 
-
 class Variable:
     data: ndarray
     grad: Optional[ndarray] = None
