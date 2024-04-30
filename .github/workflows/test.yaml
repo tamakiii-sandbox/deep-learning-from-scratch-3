@@ -4,10 +4,12 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v4
+        - run: pipx install poetry
         - uses: actions/setup-python@v5
           with:
             python-version: '3.11'
+            cache: 'poetry'
 
-        - run: pip install poetry
         - run: poetry install
         - run: poetry run mypy steps
+        - run: echo "Cache hit: ${{ steps.setup-python.outputs.cache-hit }}"
