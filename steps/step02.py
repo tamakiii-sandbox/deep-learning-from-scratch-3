@@ -1,10 +1,6 @@
 import numpy as np
 from numpy import ndarray
-
-
-class Variable:
-    def __init__(self, data: ndarray):
-        self.data = data
+from steps.step01 import Variable
 
 
 class Function:
