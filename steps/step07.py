@@ -6,17 +6,18 @@ from typing import Optional, Callable
 class Variable:
     data: ndarray
     grad: Optional[ndarray] = None
-    creator: Optional[Callable[["Variable"], "Variable"]] = None
+    creator: Optional[Function] = None
 
     def __init__(self, data: ndarray):
         self.data: ndarray = data
 
-    def set_creator(self, func: Callable[["Variable"], "Variable"]):
+    def set_creator(self, func: Function):
         self.creator = func
 
     def backward(self):
-        f: Function = self.creator
+        f = self.creator
         if f is not None:
+            assert self.grad is not None
             x = f.input
             x.grad = f.backward(self.grad)
             x.backward()

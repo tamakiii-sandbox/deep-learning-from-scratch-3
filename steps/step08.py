@@ -1,25 +1,29 @@
 import numpy as np
 from numpy import ndarray
-from typing import Optional, Callable
+from typing import Optional, Callable, NewType
+from collections.abc import MutableSequence
+
 
 
 class Variable:
     data: ndarray
     grad: Optional[ndarray] = None
-    creator: Optional[Callable[["Variable"], "Variable"]] = None
+    creator: Optional[Function] = None
 
     def __init__(self, data: ndarray):
         self.data: ndarray = data
 
-    def set_creator(self, func: Callable[["Variable"], "Variable"]):
+    def set_creator(self, func: Function):
         self.creator = func
 
     def backward(self):
-        funcs = [self.creator]
+        assert type(self.creator) == Function
+        funcs: list[Function] = [self.creator]
         while funcs:
             f: Function = funcs.pop()
-            x: ndarray = f.input
-            y: ndarray = f.output
+            x: Variable = f.input
+            y: Variable = f.output
+            assert y.grad is not None
             x.grad = f.backward(y.grad)
 
             if x.creator is not None:
