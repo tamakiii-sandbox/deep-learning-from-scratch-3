@@ -12,3 +12,4 @@ jobs:
 
         - run: poetry install
         - run: poetry run mypy steps
+        - run: poetry run black --check .
