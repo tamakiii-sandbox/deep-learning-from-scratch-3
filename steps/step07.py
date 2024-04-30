@@ -14,6 +14,13 @@ class Variable:
     def set_creator(self, func: Callable[["Variable"], "Variable"]):
         self.creator = func
 
+    def backward(self):
+        f: Function = self.creator
+        if f is not None:
+            x = f.input
+            x.grad = f.backward(self.grad)
+            x.backward()
+
 
 class Function:
     input: Variable
