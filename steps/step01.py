@@ -8,7 +8,3 @@ class Variable:
 data = np.array(1.0)
 x = Variable(data)
 print(x.data)
-
-y = Variable(1.0)
-print(y.data)
-
