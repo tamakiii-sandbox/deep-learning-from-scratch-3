@@ -4,6 +4,7 @@ from numpy import ndarray
 from typing import Optional, Callable, NewType
 from collections.abc import MutableSequence
 
+
 class Variable:
     data: ndarray
     grad: Optional[ndarray] = None
@@ -27,6 +28,7 @@ class Variable:
             if x.creator is not None:
                 funcs.append(x.creator)
 
+
 class Function:
     input: Variable
     output: Variable
@@ -46,6 +48,7 @@ class Function:
     def backward(self, gy: ndarray) -> ndarray:
         raise NotImplementedError
 
+
 class Square(Function):
     def forward(self, x: ndarray) -> ndarray:
         return x**2
@@ -54,6 +57,7 @@ class Square(Function):
         x = self.input.data
         gx = 2 * x * gy
         return gx
+
 
 class Exp(Function):
     def forward(self, x: ndarray) -> ndarray:
