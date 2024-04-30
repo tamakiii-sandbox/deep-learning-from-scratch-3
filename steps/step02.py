@@ -13,20 +13,19 @@ class Function:
     def forward(self, x):
         raise NotImplementedError()
 
+
 class Square(Function):
     def forward(self, x):
-        return x ** 2
+        return x**2
 
 
-# x = Variable(np.array(10))
-# f = Function()
-# y = f(x)
+def main():
+    x = Variable(np.array(10))
+    f = Square()
+    y = f(x)
+    print(type(y))
+    print(y.data)
 
-# print(type(y))
-# print(y.data)
 
-x = Variable(np.array(10))
-f = Square()
-y = f(x)
-print(type(y))
-print(y.data)
+if __name__ == "__main__":
+    main()
