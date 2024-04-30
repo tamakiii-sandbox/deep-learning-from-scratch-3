@@ -13,7 +13,7 @@ check: \
 	format-check
 
 mypy:
-	mypy steps
+	mypy --explicit-package-bases steps
 
 format:
 	black .
