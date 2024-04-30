@@ -1,6 +1,6 @@
 import numpy as np
 import pytest
-from step01 import Variable
+from steps.step01 import Variable
 
 
 def test_variable_initialization():
