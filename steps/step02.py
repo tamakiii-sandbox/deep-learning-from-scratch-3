@@ -8,7 +8,7 @@ class Variable:
 
 
 class Function:
-    def __call__(self, input):
+    def __call__(self, input: Variable):
         x = input.data
         y = x**2
         output = Variable(y)
