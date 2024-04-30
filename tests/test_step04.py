@@ -2,16 +2,22 @@ import pytest
 import numpy as np
 from steps.step02 import Square
 from steps.step04 import Variable
-from steps.step04 import numerical_diff
+from steps.step04 import numerical_diff, f
 
 
-def test_usage():
+def test_usage_of_numerical_diff():
     f = Square()
     x = Variable(np.array(2.0))
     dy = numerical_diff(f, x)
 
     np.testing.assert_almost_equal(dy, 4.0, decimal=5)
-    # assert dy == 0.0
+
+
+def test_usage_of_f():
+    x = Variable(np.array(0.5))
+    dy = numerical_diff(f, x)
+
+    np.testing.assert_almost_equal(dy, 3.29744, decimal=5)
 
 
 def test_numerical_diff_with_quadratic_function():
