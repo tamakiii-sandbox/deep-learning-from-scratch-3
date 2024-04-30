@@ -13,7 +13,7 @@ check: \
 	format-check
 
 mypy:
-	mypy --explicit-package-bases steps
+	mypy --explicit-package-bases --check-untyped-defs steps
 
 format:
 	black .
