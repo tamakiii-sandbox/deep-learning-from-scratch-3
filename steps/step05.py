@@ -19,7 +19,7 @@ class Function:
     def forward(self, x: ndarray):
         raise NotImplementedError()
 
-    def backward(self, gy: float):
+    def backward(self, gy: ndarray):
         raise NotImplementedError()
 
 
@@ -28,7 +28,7 @@ class Square(Function):
         y = x**2
         return y
 
-    def backward(self, gy: float):
+    def backward(self, gy: ndarray):
         x = self.input.data
         gx = 2 * x * gy
         return gx
@@ -39,7 +39,7 @@ class Exp(Function):
         y = np.exp(x)
         return y
 
-    def backward(self, gy: float):
+    def backward(self, gy: ndarray):
         x = self.input.data
         gx = np.exp(x) * gy
         return gx
