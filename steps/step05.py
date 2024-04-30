@@ -5,7 +5,8 @@ from numpy import ndarray
 class Variable:
     def __init__(self, data: ndarray):
         self.data = data
-        self.grad = None # 勾配（Gradient）
+        self.grad = None  # 勾配（Gradient）
+
 
 class Function:
     def __call__(self, input: Variable):
@@ -21,15 +22,17 @@ class Function:
     def backward(self, gy: float):
         raise NotImplementedError()
 
+
 class Square(Function):
     def forward(self, x: float):
-        y = x ** 2
+        y = x**2
         return y
 
     def backward(self, gy: float):
         x = self.input.data
         gx = 2 * x * gy
         return gx
+
 
 class Exp(Function):
     def forward(self, x: float):
@@ -40,6 +43,7 @@ class Exp(Function):
         x = self.input.data
         gx = np.exp(x) * gy
         return gx
+
 
 def main():
     A = Square()
@@ -58,6 +62,7 @@ def main():
 
     print(y.data)
     print(x.grad)
+
 
 if __name__ == "__main__":
     main()

@@ -2,6 +2,7 @@ import pytest
 import numpy as np
 from steps.step05 import Square, Exp, Variable
 
+
 def test():
     A = Square()
     B = Exp()
@@ -19,4 +20,3 @@ def test():
 
     np.testing.assert_almost_equal(y.data, 1.64872, decimal=5)
     np.testing.assert_almost_equal(x.grad, 3.29744, decimal=5)
-
