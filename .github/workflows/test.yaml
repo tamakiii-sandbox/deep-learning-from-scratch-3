@@ -1,4 +1,8 @@
 on: push
+
+env:
+  PYTHONPATH: .
+
 jobs:
     test:
       runs-on: ubuntu-latest
@@ -13,3 +17,4 @@ jobs:
         - run: poetry install
         - run: poetry run mypy steps
         - run: poetry run black --check .
+        - run: poetry run pytest tests
