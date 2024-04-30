@@ -11,16 +11,16 @@ data = np.array(1.0)
 x = Variable(data)
 print("x.data:", x.data)
 
-x = np.array(1)
-print("x.ndim:", x.ndim)
+a = np.array(1)
+print("a.ndim:", a.ndim)
 
-y = np.array([1, 2, 3])
-print("y.ndim:", y.ndim)
+b = np.array([1, 2, 3])
+print("b.ndim:", b.ndim)
 
-z = np.array(
+c = np.array(
     [
         [1, 2, 3],
         [4, 5, 6],
     ]
 )
-print("z.ndim:", z.ndim)
+print("c.ndim:", c.ndim)
