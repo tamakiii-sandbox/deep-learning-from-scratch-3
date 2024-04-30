@@ -15,6 +15,6 @@ jobs:
             cache: 'poetry'
 
         - run: poetry install
-        - run: poetry run mypy steps
+        - run: poetry run mypy --explicit-package-bases steps
         - run: poetry run black --check .
         - run: poetry run pytest tests
