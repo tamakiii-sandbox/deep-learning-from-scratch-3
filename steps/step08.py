@@ -1,8 +1,8 @@
+from __future__ import annotations
 import numpy as np
 from numpy import ndarray
 from typing import Optional, Callable, NewType
 from collections.abc import MutableSequence
-
 
 class Variable:
     data: ndarray
@@ -16,7 +16,7 @@ class Variable:
         self.creator = func
 
     def backward(self):
-        assert type(self.creator) == Function
+        assert isinstance(self.creator, Function)
         funcs: list[Function] = [self.creator]
         while funcs:
             f: Function = funcs.pop()
@@ -24,10 +24,8 @@ class Variable:
             y: Variable = f.output
             assert y.grad is not None
             x.grad = f.backward(y.grad)
-
             if x.creator is not None:
                 funcs.append(x.creator)
-
 
 class Function:
     input: Variable
@@ -48,7 +46,6 @@ class Function:
     def backward(self, gy: ndarray) -> ndarray:
         raise NotImplementedError
 
-
 class Square(Function):
     def forward(self, x: ndarray) -> ndarray:
         return x**2
@@ -57,7 +54,6 @@ class Square(Function):
         x = self.input.data
         gx = 2 * x * gy
         return gx
-
 
 class Exp(Function):
     def forward(self, x: ndarray) -> ndarray:
