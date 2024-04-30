@@ -2,16 +2,18 @@ import numpy as np
 from numpy import ndarray
 from typing import Optional, Callable
 
+
 class Variable:
     data: ndarray
     grad: Optional[ndarray] = None
-    creator: Optional[Callable[['Variable'], 'Variable']] = None
+    creator: Optional[Callable[["Variable"], "Variable"]] = None
 
     def __init__(self, data: ndarray):
         self.data: ndarray = data
 
-    def set_creator(self, func: Callable[['Variable'], 'Variable']):
+    def set_creator(self, func: Callable[["Variable"], "Variable"]):
         self.creator = func
+
 
 class Function:
     input: Variable
@@ -32,14 +34,16 @@ class Function:
     def backward(self, gy: ndarray) -> ndarray:
         raise NotImplementedError
 
+
 class Square(Function):
     def forward(self, x: ndarray) -> ndarray:
-        return x ** 2
+        return x**2
 
     def backward(self, gy: ndarray) -> ndarray:
         x = self.input.data
         gx = 2 * x * gy
         return gx
+
 
 class Exp(Function):
     def forward(self, x: ndarray) -> ndarray:
@@ -49,6 +53,7 @@ class Exp(Function):
         x = self.input.data
         gx = np.exp(x) * gy
         return gx
+
 
 def main():
     A = Square()
@@ -61,6 +66,7 @@ def main():
     y = C(b)
 
     assert y.creator == C
+
 
 if __name__ == "__main__":
     main()
