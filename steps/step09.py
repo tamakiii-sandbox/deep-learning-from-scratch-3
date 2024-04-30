@@ -4,12 +4,22 @@ from numpy import ndarray
 from typing import Optional, Callable, NewType
 
 
+def as_array(x):
+    if np.isscalar(x):
+        return np.array(x)
+    return x
+
+
 class Variable:
     data: ndarray
     grad: Optional[ndarray] = None
     creator: Optional[Function] = None
 
     def __init__(self, data: ndarray):
+        if data is not None:
+            if not isinstance(data, np.ndarray):
+                raise TypeError("{} is not supported".format(type(data)))
+
         self.data: ndarray = data
 
     def set_creator(self, func: Function):
@@ -38,7 +48,7 @@ class Function:
     def __call__(self, input: Variable) -> Variable:
         x: ndarray = input.data
         y: ndarray = self.forward(x)
-        output = Variable(y)
+        output = Variable(as_array(y))
         output.set_creator(self)
         self.input = input
         self.output = output
@@ -71,11 +81,11 @@ class Exp(Function):
         return gx
 
 
-def square(x):
+def square(x: Variable):
     f = Square()
     return Square()(x)
 
 
-def exp(x):
+def exp(x: Variable):
     f = Exp()
     return f(x)
