@@ -2,6 +2,7 @@ import pytest
 import numpy as np
 from steps.step07 import Variable, Square, Exp, Square
 
+
 def test_procedural():
     A = Square()
     B = Exp()
@@ -27,6 +28,7 @@ def test_procedural():
     x.grad = A.backward(a.grad)
 
     np.testing.assert_almost_equal(x.grad, 3.29744, decimal=5)
+
 
 def test_autopropagation():
     A = Square()

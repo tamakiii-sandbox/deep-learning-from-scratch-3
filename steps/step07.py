@@ -80,5 +80,6 @@ def main():
     assert y.creator.input.creator.input.creator.input == x
     print("OK")
 
+
 if __name__ == "__main__":
     main()
