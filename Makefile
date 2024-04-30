@@ -1,10 +1,12 @@
 .PHONY: help test check mypy format format-check
 
+export PYTHONPATH := .
+
 help:
 	@cat $(firstword $(MAKEFILE_LIST))
 
 test:
-	$(error Not implemented yet)
+	pytest tests
 
 check: \
 	mypy \
